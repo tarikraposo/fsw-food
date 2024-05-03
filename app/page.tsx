@@ -2,6 +2,7 @@ import Image from "next/image";
 import CategoryList from "./_components/categoryList";
 import Header from "./_components/header";
 import Search from "./_components/search";
+import ProductList from "./_components/productList";
 
 const Home = () => {
   return (
@@ -23,6 +24,9 @@ const Home = () => {
           sizes="100vw"
           quality={100}
         />
+      </div>
+      <div>
+        <ProductList />
       </div>
     </>
   );
