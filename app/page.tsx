@@ -1,3 +1,4 @@
+import CategoryList from "./_components/categoryList";
 import Header from "./_components/header";
 import Search from "./_components/search";
 
@@ -7,6 +8,9 @@ const Home = () => {
       <Header />
       <div className="px-5 py-6">
         <Search />
+      </div>
+      <div className="flex justify-center px-5">
+        <CategoryList />
       </div>
     </>
   );
