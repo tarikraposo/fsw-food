@@ -1,52 +1,53 @@
-import { Product } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import Image from "next/image";
-import { calcProductTotalPrice } from "../_helpers/price";
+import { calcProductTotalPrice, formatCurrency } from "../_helpers/price";
+import { ArrowDownIcon } from "lucide-react";
 
 interface ProductItemProps {
-  product: Product;
+  product: Prisma.ProductGetPayload<{
+    include: {
+      restaurant: {
+        select: {
+          name: true;
+        };
+      };
+    };
+  }>;
 }
-
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <div className="w-[150px] min-w-[150px] space-y-2">
+    <div className="w-[150px] space-y-2">
       {/* Image */}
-      <div className="relative h-[150px] w-full">
+      <div className="relative h-[150px] w-[150px]">
         <Image
           src={product.imageUrl}
           alt={product.name}
           fill
           className="rounded-lg object-cover shadow-md"
         />
-        <div className="absolute left-2 top-2 flex size-3 h-[18px] w-auto items-center rounded-md bg-red-500 px-[4.45px] py-[2px] text-white">
+        <div className="absolute left-2 top-2 flex size-3 h-[18px] w-auto items-center gap-[2px] rounded-full bg-primary px-2 py-[2px] text-xs font-semibold text-white">
+          <ArrowDownIcon size={12} />
           <span>{product.discountPercentage}%</span>
         </div>
       </div>
-      {/* Title */}
       <div className="w-[125px]">
-        <h2 className="text-[14px]">{product.name}</h2>
-        {/* Price */}
+        <h2 className="truncate text-[14px]">{product.name}</h2>
         <div className="flex items-center justify-between gap-1">
           <h3 className="font-semibold">
-            {Intl.NumberFormat("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-              minimumFractionDigits: 2,
-            }).format(calcProductTotalPrice(product))}
+            {formatCurrency(calcProductTotalPrice(product))}
           </h3>
-          {/* Price with discount */}
-
           {product.discountPercentage > 0 && (
             <span className="text-xs text-muted-foreground line-through">
-              {Intl.NumberFormat("pt-BR", {
-                style: "currency",
-                currency: "BRL",
-                minimumFractionDigits: 2,
-              }).format(Number(product.price))}
+              {formatCurrency(Number(product.price))}
             </span>
           )}
         </div>
         {/* Restaurant */}
-        <div></div>
+        <div>
+          <span className="block text-xs text-muted-foreground">
+            {product.restaurant.name}
+          </span>
+        </div>
       </div>
     </div>
   );
