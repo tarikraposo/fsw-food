@@ -15,12 +15,12 @@ const ProductImage = ({ product }: ProductImageProps) => {
   const handleBackClick = () => router.back();
 
   return (
-    <div className="relative h-[360px] w-full">
+    <div className="relative h-[330px] w-full">
       <Image
         src={product.imageUrl}
         alt={product.name}
         fill
-        className="object-cover"
+        className="z-[-1] object-cover"
       />
       <Button
         className="absolute left-4 top-4 rounded-full bg-white text-foreground hover:text-white "
