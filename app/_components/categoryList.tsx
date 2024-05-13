@@ -2,7 +2,9 @@ import { db } from "../_lib/prisma";
 import CategoryItem from "./categoryItem";
 
 const CategoryList = async () => {
-  const categories = await db.category.findMany({});
+  const categories = await db.category.findMany({
+    take: 6,
+  });
 
   return (
     <div className="grid grid-cols-2 gap-3">
