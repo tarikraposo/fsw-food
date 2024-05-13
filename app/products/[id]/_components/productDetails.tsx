@@ -114,13 +114,9 @@ const ProductDetails = ({
               <span className="text-xs">Entrega</span>
               <TimerIcon size={14} />
             </div>
-            {Number(product.restaurant.deliveryFee) > 0 ? (
-              <p className="text-xs font-semibold">
-                {product.restaurant.deliveryTimeMinutes}minutos
-              </p>
-            ) : (
-              <p></p>
-            )}
+            <p className="text-xs font-semibold">
+              {product.restaurant.deliveryTimeMinutes}min
+            </p>
           </div>
         </Card>
       </div>
@@ -131,6 +127,9 @@ const ProductDetails = ({
       <div className="mt-6 space-y-3">
         <h3 className="px-5 font-semibold">Sucos</h3>
         <ProductList products={complementaryProducts} />
+      </div>
+      <div className="mt-6 px-5">
+        <Button className="w-full font-semibold">Adicionar à sacola</Button>
       </div>
     </div>
   );
