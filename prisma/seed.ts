@@ -11,7 +11,7 @@ const createBurguers = async (
 ) => {
   const burguersCategory = await prismaClient.category.create({
     data: {
-      name: "Hambúrgueres",
+      name: "Lanches",
       imageUrl:
         "https://utfs.io/f/92918634-fc03-4425-bc1f-d1fbc8933586-vzk6us.png",
     },
